@@ -1,0 +1,59 @@
+mp:
+  openapi:
+    extensions:
+      smallrye:
+        info:
+          title: Customer API
+          version: 0.0.1
+          description: API for retrieving customers
+          contact:
+            email: frank.connolly@cronn.de
+            name: Customer API Support
+            url: http://frank-connolly.github.io/customer-api
+          license:
+            name: Apache 2.0
+            url: http://www.apache.og/licenses/LICENSE-2.0.html
+
+quarkus:
+  banner:
+    enabled: false
+  datasource:
+    db-kind: postgresql
+    devservices:
+      image-name: postgres:13
+  hibernate-orm:
+    database:
+      generation: none
+  micrometer:
+    binder:
+      http-server:
+        ignore-patterns: "/q"
+"%dev":
+  quarkus:
+    log:
+      level: INFO
+      category:
+        "dev.rhenergy":
+          level: DEBUG
+    hibernate-orm:
+      log:
+        sql: true
+    flyway:
+      migrate-at-start: true
+      locations: db/migration,db/testdata
+
+"%test":
+  quarkus:
+    log:
+      level: INFO
+      category:
+        "dev.rhenergy":
+          level: DEBUG
+    hibernate-orm:
+      log:
+        sql: true
+    flyway:
+      migrate-at-start: true
+      locations: db/migration,db/testdata
+
+
